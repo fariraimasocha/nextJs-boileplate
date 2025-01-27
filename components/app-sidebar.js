@@ -29,7 +29,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Separator } from "@/components/ui/separator"
 
 const items = [
   {
@@ -73,7 +72,7 @@ export function AppSidebar() {
         </div>
       </div>
     </SidebarHeader>
-      <SidebarContent className="bg-sidenav px-3 py-6 border-t border-white/10">
+      <SidebarContent className="bg-sidenav py-6 border-t border-white/10">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -96,14 +95,12 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="bg-sidenav">
-        <Separator />
-        <div className="p-4">
+      <SidebarFooter className="bg-sidenav border-t border-white/10 p-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
-                className="h-auto w-full justify-start gap-3 px-3 py-2"
+                className="h-auto w-full justify-start gap-3 px-1 py-2"
               >
                 <Avatar className="size-8">
                   <AvatarFallback className="bg-primary/10">
@@ -124,7 +121,6 @@ export function AppSidebar() {
               <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
