@@ -1,10 +1,9 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-import { ChartArea, Code, UsersRound } from 'lucide-react'
+import { AreaChartIcon as ChartArea, Code, UsersRound } from "lucide-react"
 import { useRouter, usePathname } from "next/navigation"
 import { signOut, useSession } from "next-auth/react"
-
 
 import {
   Sidebar,
@@ -38,7 +37,7 @@ const items = [
     title: "Employees",
     url: "/dashboard/employees",
     icon: UsersRound,
-  }
+  },
 ]
 
 export function AppSidebar() {
@@ -61,21 +60,19 @@ export function AppSidebar() {
   }
 
   return (
-    <Sidebar className="border-r border-border/40">
-    <SidebarHeader className="bg-sidenav px-4 py-6">
-      <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-primary">
-          <Code className="h-6 w-6" />
+    <Sidebar>
+      <SidebarHeader className="px-4 py-6 border">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <Code className="h-6 w-6" />
+          </div>
+          <div className="flex flex-col">
+            <h1 className="text-lg font-semibold tracking-tight text-sidebar-foreground">SlipSendr</h1>
+            <p className="text-xs text-sidebar-foreground/70">Payslip App</p>
+          </div>
         </div>
-        <div className="flex flex-col">
-          <h1 className="text-lg font-semibold tracking-tight text-white">
-          SlipSendr
-          </h1>
-          <p className="text-xs text-white/70">Payslip App</p>
-        </div>
-      </div>
-    </SidebarHeader>
-      <SidebarContent className="bg-sidenav py-6 border-t border-white/10">
+      </SidebarHeader>
+      <SidebarContent className="py-6">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -84,9 +81,9 @@ export function AppSidebar() {
                   <a
                     href={item.url}
                     className={cn(
-                      "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors text-white",
+                      "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
                       "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                      pathname === item.url && "bg-sidebar-primary text-sidebar-primary-foreground"
+                      pathname === item.url && "bg-sidebar-accent text-sidebar-accent-foreground font-medium",
                     )}
                   >
                     <item.icon className="h-4 w-4" />
@@ -98,32 +95,26 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="bg-sidenav border-t border-white/10 p-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="secondary"
-                className="h-auto w-full justify-start gap-3 px-1 py-2"
-              >
-                <Avatar className="size-8">
-                  <AvatarFallback className="bg-primary/10">
-                    {getInitials()}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col items-start gap-0.5">
-                  <span className="text-xs text-muted-foreground">
-                    {session?.user?.name}
-                  </span>
-                </div>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-[--radix-popper-anchor-width]">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleProfile}>Profile</DropdownMenuItem>
-              <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+      <SidebarFooter className="p-4 border-t">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-auto w-full justify-start gap-3 px-3 py-2">
+              <Avatar className="size-8">
+                <AvatarFallback className="bg-primary/10 text-primary">{getInitials()}</AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col items-start gap-0.5">
+                <span className="text-sm font-medium">{session?.user?.name}</span>
+                <span className="text-xs text-muted-foreground">View profile</span>
+              </div>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="w-[--radix-popper-anchor-width]">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleProfile}>Profile</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
