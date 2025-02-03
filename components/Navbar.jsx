@@ -11,12 +11,12 @@ export default function Navbar() {
     <nav className="border-b">
       <div className="flex h-16 items-center px-4 container mx-auto justify-between">
         <Link href="/" className="font-bold text-xl tracking-tight hover:opacity-75 transition">
-          nextJs
+        SlipSendr
         </Link>
         <div>
           {!session ? (
             <Button asChild variant="default">
-              <Link href="/auth/signUp">Register</Link>
+              <Link href="/auth/signUp">Get Started</Link>
             </Button>
           ) : (
             <div className="flex flex-col gap-0.5">

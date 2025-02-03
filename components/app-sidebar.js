@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-import { ChartArea, Code } from 'lucide-react'
+import { ChartArea, Code, UsersRound } from 'lucide-react'
 import { useRouter, usePathname } from "next/navigation"
 import { signOut, useSession } from "next-auth/react"
 
@@ -12,10 +12,8 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
@@ -33,9 +31,14 @@ import {
 const items = [
   {
     title: "Dashboard",
-    url: "/",
+    url: "/dashboard",
     icon: ChartArea,
   },
+  {
+    title: "Employees",
+    url: "/dashboard/employees",
+    icon: UsersRound,
+  }
 ]
 
 export function AppSidebar() {
@@ -49,7 +52,7 @@ export function AppSidebar() {
   }
 
   const handleProfile = () => {
-    router.push("/profile")
+    router.push("/dashboard/profile")
   }
 
   const getInitials = () => {
@@ -81,7 +84,7 @@ export function AppSidebar() {
                   <a
                     href={item.url}
                     className={cn(
-                      "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
+                      "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors text-white",
                       "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                       pathname === item.url && "bg-sidebar-primary text-sidebar-primary-foreground"
                     )}
@@ -99,7 +102,7 @@ export function AppSidebar() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
-                variant="ghost"
+                variant="secondary"
                 className="h-auto w-full justify-start gap-3 px-1 py-2"
               >
                 <Avatar className="size-8">

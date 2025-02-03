@@ -210,7 +210,7 @@ function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-background py-8">
-      <div className="container mx-auto max-w-7xl px-4">
+      <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h1 className="font-bold text-xl tracking-tight">Profile</h1>
         </div>

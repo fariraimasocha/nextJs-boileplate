@@ -2,6 +2,7 @@
 import "./globals.css";
 import { Toaster } from 'react-hot-toast';
 import Providers from "@/components/providers";
+import MouseMoveEffect from "@/components/mouse-hover-effect";
 import Navbar from "@/components/Navbar";
 
 export const metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
         position="top-center"
         reverseOrder={false}
         />
+        <MouseMoveEffect />
       </body>
       </Providers>
     </html>
