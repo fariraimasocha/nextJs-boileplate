@@ -13,16 +13,8 @@ function ProfilePage() {
   console.log(session);
   const [userDetails, setUserDetails] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [isEditing, setIsEditing] = useState(false)
   const [isEditingPersonal, setIsEditingPersonal] = useState(false)
-  const [formData, setFormData] = useState({
-    farm_name: '',
-    city: '',
-    country: '',
-    farm_type: '',
-    farm_size: '',
-    employees_number: ''
-  })
+
   const [personalFormData, setPersonalFormData] = useState({
     name: '',
     email: '',
@@ -39,7 +31,13 @@ function ProfilePage() {
           if (response.ok) {
             const data = await response.json()
             setUserDetails(data)
-            setFormData(data)
+            setFormData({
+              name: data.name || '',
+              email: data.email || '',
+              phone: data.phone || '',
+              currentPassword: '',
+              newPassword: '',
+            })
           }
         } catch (error) {
           console.error('Error fetching user details:', error)
@@ -331,131 +329,6 @@ function ProfilePage() {
               )}
             </CardContent>
           </Card>
-
-          {userDetails && (
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Building2 className="h-5 w-5 text-gray-500" />
-                    <CardTitle>Farm Information</CardTitle>
-                  </div>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    onClick={() => setIsEditing(!isEditing)}
-                  >
-                    <Pencil className="h-4 w-4 mr-2" />
-                    {isEditing ? 'Cancel' : 'Edit'}
-                  </Button>
-                </div>
-                <CardDescription>Details about your farm operations</CardDescription>
-              </CardHeader>
-              <CardContent>
-                {isEditing ? (
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Farm Name</label>
-                      <Input
-                        name="farm_name"
-                        value={formData.farm_name}
-                        onChange={handleInputChange}
-                        className="mt-1"
-                      />
-                    </div>
-                    <Separator />
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Location</label>
-                      <div className="grid grid-cols-2 gap-2 mt-1">
-                        <Input
-                          name="city"
-                          placeholder="City"
-                          value={formData.city}
-                          onChange={handleInputChange}
-                        />
-                        <Input
-                          name="country"
-                          placeholder="Country"
-                          value={formData.country}
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                    </div>
-                    <Separator />
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Farm Type</label>
-                      <Input
-                        name="farm_type"
-                        value={formData.farm_type}
-                        onChange={handleInputChange}
-                        className="mt-1"
-                      />
-                    </div>
-                    <Separator />
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Farm Size</label>
-                      <Input
-                        name="farm_size"
-                        value={formData.farm_size}
-                        onChange={handleInputChange}
-                        className="mt-1"
-                      />
-                    </div>
-                    <Separator />
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Number of Employees</label>
-                      <Input
-                        name="employees_number"
-                        type="number"
-                        value={formData.employees_number}
-                        onChange={handleInputChange}
-                        className="mt-1"
-                      />
-                    </div>
-                    <div className="pt-4 flex justify-end">
-                      <Button type="submit">Save Changes</Button>
-                    </div>
-                  </form>
-                ) : (
-                  <div className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Farm Name</label>
-                      <p className="mt-1 text-sm">{userDetails.farm_name}</p>
-                    </div>
-                    <Separator />
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Location</label>
-                      <div className="flex items-center gap-1 mt-1">
-                        <MapPin className="h-3 w-3 text-gray-500" />
-                        <p className="text-sm">{userDetails.city}, {userDetails.country}</p>
-                      </div>
-                    </div>
-                    <Separator />
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Farm Type</label>
-                      <p className="mt-1 text-sm">{userDetails.farm_type}</p>
-                    </div>
-                    <Separator />
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Farm Size</label>
-                      <div className="flex items-center gap-1 mt-1">
-                        <Ruler className="h-3 w-3 text-gray-500" />
-                        <p className="mt-1 text-sm">{userDetails.farm_size}</p>
-                      </div>
-                    </div>
-                    <Separator />
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Number of Employees</label>
-                      <div className="flex items-center gap-1 mt-1">
-                        <Users className="h-3 w-3 text-gray-500" />
-                        <p className="text-sm">{userDetails.employees_number}</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          )}
         </div>
       </div>
     </div>
